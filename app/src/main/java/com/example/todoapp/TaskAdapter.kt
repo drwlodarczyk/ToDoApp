@@ -1,13 +1,14 @@
-package com.example.todoapp
+package com.example.todoapp.com.example.todoapp
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import androidx.recyclerview.widget.RecyclerView
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import android.widget.ImageButton
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AlertDialog
+import android.widget.EditText
+import com.example.todoapp.R
 
 class TaskAdapter(private val tasks: MutableList<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
@@ -38,31 +39,29 @@ class TaskAdapter(private val tasks: MutableList<Task>) : RecyclerView.Adapter<T
             editText.setText(task.title)
 
             AlertDialog.Builder(holder.itemView.context)
-                .setTitle("Edytuj zadanie")
+                .setTitle("Edit Task")
                 .setView(editText)
-                .setPositiveButton("Zapisz") { _, _ ->
+                .setPositiveButton("Save") { _, _ ->
                     task.title = editText.text.toString()
                     notifyItemChanged(position)
                 }
-                .setNegativeButton("Anuluj", null)
+                .setNegativeButton("Cancel", null)
                 .show()
         }
 
         holder.buttonDelete.setOnClickListener {
             AlertDialog.Builder(holder.itemView.context)
-                .setTitle("Usuń zadanie")
-                .setMessage("Czy na pewno chcesz usunąć to zadanie?")
-                .setPositiveButton("Tak") { _, _ ->
+                .setTitle("Delete Task")
+                .setMessage("Are you sure you want to delete this task?")
+                .setPositiveButton("Yes") { _, _ ->
                     tasks.removeAt(position)
                     notifyItemRemoved(position)
                     notifyItemRangeChanged(position, tasks.size)
                 }
-                .setNegativeButton("Anuluj", null)
+                .setNegativeButton("Cancel", null)
                 .show()
         }
-
     }
-
 
     override fun getItemCount(): Int {
         return tasks.size
