@@ -12,6 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.example.todoapp.com.example.todoapp.Task
 import com.example.todoapp.com.example.todoapp.TaskAdapter
+import android.content.Intent
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     // Room Database
     private lateinit var db: AppDatabase
     private lateinit var taskDao: TaskDao
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
