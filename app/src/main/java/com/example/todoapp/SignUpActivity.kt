@@ -39,9 +39,11 @@ class SignUpActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
+                        val user = auth.currentUser
+                        val intent = Intent(this, MainActivity::class.java)
                         // Registration success, navigate to Login screen
                         Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, LoginActivity::class.java))
+                        startActivity(intent)
                         finish() // Close the sign-up activity
                     } else {
                         // If registration fails, display a message to the user.
