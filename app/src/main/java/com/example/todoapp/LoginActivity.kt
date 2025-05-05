@@ -42,16 +42,17 @@ class LoginActivity : AppCompatActivity() {
 
             // Perform login using Firebase Authentication
             auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
+                .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val user = auth.currentUser
-                        // Show welcome message (optional)
-                        Toast.makeText(this, "Welcome back, ${user?.email}", Toast.LENGTH_SHORT).show()
+                        if (user != null) {
+                            // Show welcome message (optional)
+                            Toast.makeText(this, "Welcome back, ${user?.email}", Toast.LENGTH_SHORT).show()
 
-                        // Navigate to MainActivity (ToDo List)
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish() // Close the LoginActivity to prevent back navigation
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
                     } else {
                         // Handle login failure
                         Toast.makeText(this, "Authentication failed: ${task.exception?.message}", Toast.LENGTH_LONG).show()

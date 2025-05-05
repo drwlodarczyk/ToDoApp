@@ -14,6 +14,7 @@ import com.example.todoapp.com.example.todoapp.Task
 import com.example.todoapp.com.example.todoapp.TaskAdapter
 import android.content.Intent
 import com.google.firebase.auth.FirebaseAuth
+import android.util.Log
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +33,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        auth = FirebaseAuth.getInstance()
+
+        Log.d("MainActivity", "MainActivity initialized")
 
         // Initialize RecyclerView and other views
         recyclerViewTasks = findViewById(R.id.recyclerViewTasks)
